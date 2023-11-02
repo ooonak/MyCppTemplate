@@ -3,8 +3,6 @@ cmake_minimum_required(VERSION 3.22)
 # set the project name and version
 project(MyCppTemplate VERSION 0.0.1 LANGUAGES CXX)
 
-set(NAMESPACE ok)
-
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
     message(FATAL_ERROR "Do not build in-source!")
 endif()
@@ -32,7 +30,7 @@ find_package(spdlog REQUIRED)
 
 # define library
 add_library(${PROJECT_NAME}
-    Public.cpp include/${NAMESPACE}/Public.hpp
+    Public.cpp include/${PROJECT_NAME}/Public.hpp
     Private.cpp Private.hpp
 )
 
@@ -77,13 +75,13 @@ install(TARGETS ${PROJECT_NAME}
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-install(DIRECTORY include/${NAMESPACE}
+install(DIRECTORY include/${PROJECT_NAME}
         DESTINATION include
         COMPONENT Devel
 )
 
 install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.h"
-        DESTINATION include/${NAMESPACE}
+  DESTINATION include/${PROJECT_NAME}
 )
 
 # setup installer
@@ -128,6 +126,6 @@ install(FILES
 install(EXPORT ${CMAKE_PROJECT_NAME}Targets
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
         FILE ${PROJECT_NAME}Targets.cmake
-        NAMESPACE ${NAMESPACE}::
+        NAMESPACE ${PROJECT_NAME}::
         COMPONENT Devel
 )
