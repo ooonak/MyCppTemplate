@@ -1,8 +1,17 @@
 #include "MyCppTemplate/Public.hpp"
-#include "Private.hpp"
+#include "PublicImpl.hpp"
 
-
-bool ok::public_func()
+ok::Public::Public() : impl_{std::make_unique<PublicImpl>()}
 {
-  return private_func();
+
+}
+
+ok::Public::~Public()
+{
+
+}
+
+bool ok::Public::sayHello() const
+{
+  return impl_->sayHello();
 }

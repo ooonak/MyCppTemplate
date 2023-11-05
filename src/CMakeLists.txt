@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.24)
 
 # set the project name and version
 project(MyCppTemplate VERSION 0.0.1 LANGUAGES CXX)
+set(NAMESPACE ok)
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
     message(FATAL_ERROR "Do not build in-source!")
@@ -31,7 +32,12 @@ find_package(spdlog REQUIRED)
 # define library
 add_library(${PROJECT_NAME}
     Public.cpp include/${PROJECT_NAME}/Public.hpp
-    Private.cpp Private.hpp
+        PublicImpl.cpp PublicImpl.hpp
+)
+
+target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        spdlog::spdlog
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
