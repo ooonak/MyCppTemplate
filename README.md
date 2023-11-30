@@ -3,7 +3,7 @@
 ### Build, test & run
 ```bash
 $ cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug \
-  -DCMAKE_INSTALL_PREFIX=/home/swu/usr/local
+  -DCMAKE_INSTALL_PREFIX=$HOME/usr/local
 $ cmake --build build
 $ ctest --test-dir build
 
@@ -19,6 +19,8 @@ $ cd build; cpack -G TGZ
 ```
 
 ## Next step
+  - nix
+  - conan
   - set compiler flags
   - coverage
   - valgrind
